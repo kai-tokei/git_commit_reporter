@@ -1,0 +1,76 @@
+commit fe6a16bbd73697b4a5640f93a8a6cd291135d29c
+Author: u3kai <beinosuke01@gmail.com>
+Date:   Mon Feb 16 11:04:20 2026 +0900
+
+    first
+
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..a99d9e0
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,37 @@
++# Created by https://www.toptal.com/developers/gitignore/api/macos
++# Edit at https://www.toptal.com/developers/gitignore?templates=macos
++
++### macOS ###
++# General
++.DS_Store
++.AppleDouble
++.LSOverride
++
++# Icon must end with two \r
++Icon
++
++
++# Thumbnails
++._*
++
++# Files that might appear in the root of a volume
++.DocumentRevisions-V100
++.fseventsd
++.Spotlight-V100
++.TemporaryItems
++.Trashes
++.VolumeIcon.icns
++.com.apple.timemachine.donotpresent
++
++# Directories potentially created on remote AFP share
++.AppleDB
++.AppleDesktop
++Network Trash Folder
++Temporary Items
++.apdisk
++
++### macOS Patch ###
++# iCloud generated files
++*.icloud
++
++# End of https://www.toptal.com/developers/gitignore/api/macos
+diff --git a/git_commit_reporter.sh b/git_commit_reporter.sh
+new file mode 100755
+index 0000000..2eccb15
+--- /dev/null
++++ b/git_commit_reporter.sh
+@@ -0,0 +1,21 @@
++#!/bin/bash
++
++# Gitのログを１日ごとにDiffごと書き出す
++
++start_date="2025-09-10"
++end_date="2025-09-15"
++
++current_date=$start_date
++
++while [ "$current_date" != "$end_date" ]; do
++  echo "$current_date"
++
++  count=git log \
++    --since "$current_date 00:00:00" \
++    --until "$current_date 23:59:59" \
++    | wc -l 
++
++  current_date="$(date -v+1d -j -f "%Y-%m-%d" "$current_date" "+%Y-%m-%d" )"
++
++done
++
